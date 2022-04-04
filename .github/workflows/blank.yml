@@ -5,5 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run tests with Maven
-        run: mvn --version
+        run: cd
+      - name: LS
+        run: ls
       
