@@ -5,4 +5,5 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Run tests with Maven
+        working-directory: /Users/cobe/IdeaProjects/cucumber-testng-appium-raw
         run: mvn clean test -Dsurefire.suiteXmlFiles=/Users/cobe/IdeaProjects/cucumber-testng-appium-raw/src/test/resources/testngandroid.xml
