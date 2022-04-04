@@ -5,7 +5,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run tests with Maven
-        run: cd
-      - name: LS
-        run: ls
-      
+        run: mvn clean test -Dsurefire.suiteXmlFiles=/Users/cobe/IdeaProjects/cucumber-testng-appium-raw/src/test/resources/testngandroid.xml
