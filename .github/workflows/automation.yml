@@ -9,7 +9,6 @@ on:
     paths: 
     - 'this/tests/**'
 
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -19,10 +18,26 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            android:
+            - 'this/tests/**'
+            ios:
+            - 'this/testsIOS/**'
+      
       # Runs a single command using the runners shell
-      - name: Run a one-line script
+      - name: Run android tests
         working-directory: /Users/cobe/IdeaProjects/cucumber-testng-appium-raw
+        if: steps.filter.outputs.android == 'true'
         run: mvn clean test -Dsurefire.suiteXmlFiles=/Users/cobe/IdeaProjects/cucumber-testng-appium-raw/src/test/resources/testngandroid.xml
+        
+      - name: Run ios tests
+        working-directory: /Users/cobe/IdeaProjects/cucumber-testng-appium-raw
+        if: steps.filter.outputs.ios == 'true'
+        run: mvn clean test -Dsurefire.suiteXmlFiles=/Users/cobe/IdeaProjects/cucumber-testng-appium-raw/src/test/resources/testngios.xml
+
