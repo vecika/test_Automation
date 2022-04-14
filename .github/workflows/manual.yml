@@ -10,10 +10,13 @@ on:
     inputs:
       name:
         # Friendly description to be shown in the UI instead of 'name'
-        description: 'Person to greet'
+        type: choice
+        description: Platform
         # Default value if no value is explicitly provided
-        default: 'Android'
-        options: ['Android', 'iOS']
+        default: Android
+        options:
+        - Android
+        - iOS
         # Input has to be provided for the workflow to run
         required: true
 
