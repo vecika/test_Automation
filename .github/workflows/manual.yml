@@ -8,17 +8,28 @@ on:
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
-      name:
-        # Friendly description to be shown in the UI instead of 'name'
+      platform:
         type: choice
         description: Platform
-        # Default value if no value is explicitly provided
         default: Android
         options:
         - Android
         - iOS
-        # Input has to be provided for the workflow to run
         required: true
+      suite:
+        type: choice
+        description: Test suite
+        default: Regression
+        options:
+        - Regression
+        - Smoke
+        - Login
+        - Registration
+        - Something else
+        required: true
+        
+        
+        
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -31,4 +42,4 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Send greeting
-      run: echo "Hello ${{ github.event.inputs.name }}"
+      run: echo "Hello ${{ github.event.inputs.suite }}"
