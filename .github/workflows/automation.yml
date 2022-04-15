@@ -2,27 +2,18 @@
 
 name: CI
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
     paths: 
     - 'this/tests/**'
     - 'this/testsIOS/**'
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: self-hosted
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      
       - name: Update project
         working-directory: /Users/cobe/Documents/automation/test_Automation
         run: git pull origin main
@@ -36,7 +27,6 @@ jobs:
             ios:
             - 'this/testsIOS/**'
       
-      # Runs a single command using the runners shell
       - name: Run android tests
         working-directory: /Users/cobe/IdeaProjects/cucumber-testng-appium-raw
         if: steps.filter.outputs.android == 'true'
@@ -47,23 +37,9 @@ jobs:
         if: steps.filter.outputs.ios == 'true'
         run: mvn clean test -Dsurefire.suiteXmlFiles=/Users/cobe/IdeaProjects/cucumber-testng-appium-raw/src/test/resources/testngios.xml
         
-  email:
-     runs-on: self-hosted
-     steps:
-      - name: Send mail
-        uses: dawidd6/action-send-mail@v3
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3.0.0
         with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{secrets.MAIL_USERNAME}}
-          password: ${{secrets.MAIL_PASSWORD}}
-          subject: Github Actions job result
-          to: kardum.vedran@gmail.com
-          from: Report 
-          secure: true
-          body: Build job of ${{github.repository}} completed successfully!
-          ignore_cert: true
-          convert_markdown: true
-          attachments: /Users/cobe/IdeaProjects/cucumber-testng-appium-raw/target/Pixel_2_API_30, /Users/cobe/IdeaProjects/cucumber-testng-appium-raw/target/Nexus_5X_API_30
-          priority: low
-
+          name: HTML report
+          path: testing.txt
+ 
