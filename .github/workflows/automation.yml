@@ -66,6 +66,6 @@ jobs:
           body: Build job of ${{github.repository}} completed successfully!
           ignore_cert: true
           convert_markdown: true
-          attachments: artifact
+          attachments: artifact.zip
           priority: low
  
