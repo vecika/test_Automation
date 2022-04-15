@@ -43,4 +43,21 @@ jobs:
         with:
           name: HTML report
           path: /Users/cobe/IdeaProjects/cucumber-testng-appium-raw/target/Nexus_5X_API_30
+          
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: Github Actions job result
+          to: kardum.vedran@gmail.com
+          from: Luke Skywalker 
+          secure: true
+          body: Build job of ${{github.repository}} completed successfully!
+          ignore_cert: true
+          convert_markdown: true
+          attachments: /Users/cobe/IdeaProjects/cucumber-testng-appium-raw/target/Nexus_5X_API_30
+          priority: low
  
