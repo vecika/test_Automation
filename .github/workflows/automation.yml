@@ -42,5 +42,5 @@ jobs:
         uses: actions/upload-artifact@v3.0.0
         with:
           name: HTML report
-          path: testing.txt
+          path: /Users/cobe/IdeaProjects/cucumber-testng-appium-raw/target/Nexus_5X_API_30
  
