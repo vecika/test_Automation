@@ -54,7 +54,7 @@ jobs:
           password: ${{secrets.MAIL_PASSWORD}}
           subject: Github Actions job result
           to: kardum.vedran@gmail.com
-          from: Luke Skywalker 
+          from: CobeBot 
           secure: true
           body: Build job of ${{github.repository}} completed successfully!
           ignore_cert: true
