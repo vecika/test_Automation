@@ -48,7 +48,7 @@ jobs:
         if: always()
         uses: actions/download-artifact@v3.0.0
         with:
-          name: Artifact
+          name: HTML report
           path: artifact
           
       - name: Send mail
