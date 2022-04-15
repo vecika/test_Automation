@@ -38,6 +38,7 @@ jobs:
         run: mvn clean test -Dsurefire.suiteXmlFiles=/Users/cobe/IdeaProjects/cucumber-testng-appium-raw/src/test/resources/testngios.xml
         
       - name: Upload a Build Artifact
+        if: always()
         uses: actions/upload-artifact@v3.0.0
         with:
           name: HTML report
