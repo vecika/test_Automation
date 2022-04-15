@@ -48,7 +48,7 @@ jobs:
         run: mvn clean test -Dsurefire.suiteXmlFiles=/Users/cobe/IdeaProjects/cucumber-testng-appium-raw/src/test/resources/testngios.xml
         
   email:
-     runs-on: self-hosted 
+     runs-on: self-hosted
      steps:
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
@@ -64,7 +64,6 @@ jobs:
           body: Build job of ${{github.repository}} completed successfully!
           ignore_cert: true
           convert_markdown: true
-          working-directory: /Users/cobe/IdeaProjects/cucumber-testng-appium-raw
           attachments: /Users/cobe/IdeaProjects/cucumber-testng-appium-raw/target/Pixel_2_API_30, /Users/cobe/IdeaProjects/cucumber-testng-appium-raw/target/Nexus_5X_API_30
           priority: low
 
