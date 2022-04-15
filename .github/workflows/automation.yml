@@ -44,12 +44,10 @@ jobs:
           name: HTML report
           path: /Users/cobe/IdeaProjects/cucumber-testng-appium-raw/target/Nexus_5X_API_30
           
-      - name: Download a Build Artifact
+      - name: Zip report
+        working-directory: /Users/cobe/IdeaProjects/cucumber-testng-appium-raw
         if: always()
-        uses: actions/download-artifact@v3.0.0
-        with:
-          name: HTML report
-          path: artifact
+        run: zip -r reports.zip /Users/cobe/IdeaProjects/cucumber-testng-appium-raw/target
           
       - name: Send mail
         if: always()
@@ -66,6 +64,7 @@ jobs:
           body: Build job of ${{github.repository}} completed successfully!
           ignore_cert: true
           convert_markdown: true
-          attachments: artifact.zip
+          attachments: /Users/cobe/reports.zip
           priority: low
  
+      
